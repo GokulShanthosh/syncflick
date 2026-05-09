@@ -11,29 +11,46 @@ export default function ChatPanel({ messages, onSend }) {
   function handleSend(e) {
     e.preventDefault();
     if (!input.trim()) return;
+
     onSend(input.trim());
     setInput("");
   }
 
   return (
-    <div style={{ width: 280, display: "flex", flexDirection: "column", height: "80vh" }}>
-      <h3>Chat</h3>
-      <div style={{ flex: 1, overflowY: "auto", border: "1px solid #ccc", padding: 8 }}>
-        {messages.map((m, i) => (
-          <div key={i}>
-            <strong>{m.user}:</strong> {m.message}
-          </div>
-        ))}
+    <div className="chat-panel">
+      <div className="chat-header">
+        <div>
+          <h3>Chat</h3>
+          <p className="chat-subtitle">Send messages that everyone in the room can see.</p>
+        </div>
+      </div>
+
+      <div className="chat-messages" role="log" aria-live="polite">
+        {messages.length > 0 ? (
+          messages.map((m, i) => (
+            <div key={i} className="chat-message">
+              <span className="chat-message-author">{m.user}</span>
+              <span className="chat-message-text">{m.message}</span>
+            </div>
+          ))
+        ) : (
+          <div className="chat-empty">No messages yet. Start the conversation.</div>
+        )}
+
         <div ref={bottomRef} />
       </div>
-      <form onSubmit={handleSend} style={{ display: "flex", gap: 4, marginTop: 8 }}>
+
+      <form onSubmit={handleSend} className="chat-form">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Say something..."
-          style={{ flex: 1 }}
+          placeholder="Type your message..."
+          aria-label="Type your message"
+          className="chat-input"
         />
-        <button type="submit">Send</button>
+        <button type="submit" className="chat-send-button">
+          Send
+        </button>
       </form>
     </div>
   );
