@@ -30,3 +30,9 @@ class ChatMessage(BaseModel):
 class PresenceEvent(BaseModel):
     type: Literal["join", "leave"]
     user: str
+
+
+class ProcessingUpdate(BaseModel):
+    type: Literal["processing_done", "processing_error"]
+    stream_url: Optional[str] = None
+    error: Optional[str] = None

@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import rooms, upload, stream, ws
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 app = FastAPI(title="SyncFlick API")
 
