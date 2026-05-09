@@ -2,7 +2,7 @@
 
 export default function useWebSocket(roomId, name, onMessage) {
   const wsRef = useRef(null);
-  const base = (import.meta.env.VITE_BACKEND_URL || "").replace(/^http/, "ws");
+  const base = (import.meta.env.VITE_BACKEND_URL || "http://localhost:8000").replace(/^http/, "ws");
 
   useEffect(() => {
     const ws = new WebSocket(`${base}/ws/${roomId}?name=${encodeURIComponent(name)}`);

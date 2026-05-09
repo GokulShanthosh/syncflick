@@ -25,7 +25,7 @@ export default function Room() {
   function onMessage(event) {
     const data = JSON.parse(event.data);
 
-    if (data.type === "processing_done") {
+    if (data.type === "processing_done" || data.type === "sync_state") {
       setStreamUrl(data.stream_url);
     }
 

@@ -5,9 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/rooms": process.env.VITE_BACKEND_URL || "http://localhost:8000",
-      "/upload": process.env.VITE_BACKEND_URL || "http://localhost:8000",
-      "/stream": process.env.VITE_BACKEND_URL || "http://localhost:8000",
+      "/rooms":  { target: process.env.VITE_BACKEND_URL || "http://localhost:8000", changeOrigin: true },
+      "/upload": { target: process.env.VITE_BACKEND_URL || "http://localhost:8000", changeOrigin: true },
+      "/stream": { target: process.env.VITE_BACKEND_URL || "http://localhost:8000", changeOrigin: true },
+      "/ws":     { target: process.env.VITE_BACKEND_URL || "http://localhost:8000", changeOrigin: true, ws: true },
     },
   },
 });
